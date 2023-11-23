@@ -1,0 +1,54 @@
+//100 Days of RTL//
+
+//Abilash P//
+
+//D flipflop without reset//
+
+module d_flipflip_tb ();
+  
+  reg  CLK, D;
+  wire Q, Qbar;
+  
+  d_flipflop DUT (.CLK (CLK), .D(D), .Q(Q), .Qbar(Qbar));
+  
+  initial 
+    begin
+      CLK=0;
+      forever #10 CLK = ~CLK;  
+    end 
+  
+  initial 
+    begin 
+      $display("Verification of 0 conditon");
+      D = 0;
+      #20;
+      $display("------------------------------");
+    
+      $display("Verification of 1 conditon");
+      D = 1;
+      #20;
+      $display("------------------------------");
+    
+      $display("Verification of 0 conditon");
+      D = 0;
+      #20;
+      $display("------------------------------");
+    
+      $display("Verification of 1 conditon");
+      D = 1;
+      #20;
+      $display("------------------------------");
+    
+    $finish;
+   end 
+  
+   initial
+     begin
+      $dumpfile("dump.vcd");
+      $dumpvars(1);
+     end
+  
+  initial
+    $monitor("simtime = %g, CLK = %b, D = %b, Q = %b, QBAR =%b", $time, CLK, D, Q, Qbar);
+endmodule
+  
